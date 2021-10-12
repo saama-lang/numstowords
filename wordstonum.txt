@@ -1,0 +1,92 @@
+import java.io.*;
+public class MyClass {
+    public static void main(String args[])throws IOException {
+        BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+       int n;
+       n=Integer.parseInt(br.readLine());
+        String onedig[]={"Zero","One","Two","Three","Four","Five","Six","Seven","Eight","Nine"};
+        String doubdig[]={"Eleven","Twelve","Thirteen","Forteen","Fifteen","Sixteen","Seventeen","Eighteen","Nineteen"};
+        String dobldig[]={"Ten","Twenty","Thirty","Fourty","Fifty","Sixty","Seventy","Eighty","Ninety"};
+        String thou[]={"Thousand"};
+        String hund[]={"Hundred"};
+        String s=Integer.toString(n);
+        int len=s.length();
+        if(len==1)
+        {
+            System.out.print(onedig[n]);
+        }
+        if(len==2)
+        {
+            int templast=n%10;
+            n=n/10;
+            if(n>1)
+            {
+            System.out.print(dobldig[n-2]+' '+onedig[templast]);
+            }
+            else if(n==1)
+            {
+                System.out.print(doubdig[n+2]);
+            }
+        }
+        if(len==3)
+        {
+                int templast=n%10;
+                n=n/10;
+                int tempmid=n%10;
+                n=n/10;
+                int tempfrst=n;
+                if(tempmid==0 && templast==0)
+                {
+                    System.out.print(onedig[tempfrst]+" "+"Hundred");
+                }
+                else if(tempmid==0 && templast!=0)
+                {
+                    System.out.print(onedig[tempfrst]+" "+"Hundred and"+" "+onedig[templast]);
+                }
+                else if(tempmid!=0 && templast==0)
+                {
+                     System.out.println(onedig[tempfrst]+" "+"Hundred and"+" "+dobldig[tempmid-1]);
+                }
+               else if(tempmid!=0 && tempfrst!=0 && tempmid!=1)
+               {
+                System.out.println(onedig[tempfrst]+" "+"Hundred and"+" "+dobldig[tempmid-1]+" "+onedig[templast]);
+               }
+                else if(tempmid==1 && tempfrst!=0)
+                System.out.println(onedig[tempfrst]+" "+"Hundred and"+" "+doubdig[templast-1]);
+            }
+            if(len==4)
+            {
+                int last=n%10;
+                n=n/10;
+                int beforelast=n%10;
+                n=n/10;
+                int afterfirst=n%10;
+                n=n/10;
+                int first=n;
+                if(last==0 && beforelast==0 && afterfirst==0)
+                {
+                    System.out.println(onedig[first]+" "+"thousand");
+                }
+                else if(last!=0 && beforelast==0 && afterfirst==0)
+                {
+                    System.out.println(onedig[first]+" "+"thousand and"+" "+onedig[last]);
+                }
+                else if(last!=0 && beforelast==1 && afterfirst==0)
+                {
+                    System.out.println(onedig[first]+" "+"thousand and"+" "+doubdig[last-1]);
+                }
+                else if(last==0 && beforelast!=0 && afterfirst==0)
+                {
+                    System.out.println(onedig[first]+" "+"thousand and"+" "+dobldig[last-1]);
+                }
+                else if(last!=0 && beforelast==0 && afterfirst!=0)
+                {
+                    System.out.println(onedig[first]+" "+"thousand and"+" "+onedig[afterfirst]+" "+"hundred and"+" "+onedig[last]);
+                }
+                else if(last!=0 && beforelast!=0 && afterfirst!=0 && beforelast!=1)
+                {
+                    System.out.println(onedig[first]+" "+"thousand"+" "+onedig[afterfirst]+" "+"hundred and"+" "+dobldig[beforelast-1]+" "+onedig[last]);
+                }
+            }
+        }
+    }
